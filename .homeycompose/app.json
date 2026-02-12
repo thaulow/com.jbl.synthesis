@@ -1,6 +1,6 @@
 {
   "id": "com.jbl.synthesis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -17,7 +17,18 @@
     "music"
   ],
   "tags": {
-    "en": ["jbl", "synthesis", "receiver", "avr", "home theater", "surround", "dolby", "atmos", "dts", "auro"]
+    "en": [
+      "jbl",
+      "synthesis",
+      "receiver",
+      "avr",
+      "home theater",
+      "surround",
+      "dolby",
+      "atmos",
+      "dts",
+      "auro"
+    ]
   },
   "permissions": [],
   "images": {
