@@ -1,0 +1,12 @@
+{
+  "type": "enum",
+  "title": { "en": "Display" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "off", "title": { "en": "Off" } },
+    { "id": "dim", "title": { "en": "Dim" } },
+    { "id": "bright", "title": { "en": "Bright" } }
+  ]
+}

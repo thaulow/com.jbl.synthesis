@@ -1,0 +1,29 @@
+{
+  "id": "send_rc5_command",
+  "title": { "en": "Send RC5 command" },
+  "titleFormatted": { "en": "Send RC5 system [[system]] command [[command]]" },
+  "hint": { "en": "Send a raw RC5 IR command (advanced)" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "system",
+      "type": "number",
+      "title": { "en": "System" },
+      "min": 0,
+      "max": 31,
+      "step": 1
+    },
+    {
+      "name": "command",
+      "type": "number",
+      "title": { "en": "Command" },
+      "min": 0,
+      "max": 127,
+      "step": 1
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "set_display_brightness",
+  "title": { "en": "Set display to [[level]]" },
+  "titleFormatted": { "en": "Set display to [[level]]" },
+  "hint": { "en": "Set the front panel display brightness" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "level",
+      "type": "dropdown",
+      "title": { "en": "Brightness" },
+      "values": [
+        { "id": "off", "label": { "en": "Off" } },
+        { "id": "dim", "label": { "en": "Dim" } },
+        { "id": "bright", "label": { "en": "Bright" } }
+      ]
+    }
+  ]
+}

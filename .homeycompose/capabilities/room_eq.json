@@ -1,0 +1,13 @@
+{
+  "type": "enum",
+  "title": { "en": "Room EQ" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "off", "title": { "en": "Off" } },
+    { "id": "eq1", "title": { "en": "EQ 1" } },
+    { "id": "eq2", "title": { "en": "EQ 2" } },
+    { "id": "eq3", "title": { "en": "EQ 3" } }
+  ]
+}

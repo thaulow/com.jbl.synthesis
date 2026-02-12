@@ -1,0 +1,33 @@
+{
+  "id": "com.jbl.synthesis",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "JBL Synthesis"
+  },
+  "description": {
+    "en": "Control your JBL Synthesis receiver (SDR-35, SDR-38, SDP-55, SDP-58)"
+  },
+  "brandColor": "#000000",
+  "category": [
+    "music"
+  ],
+  "tags": {
+    "en": ["jbl", "synthesis", "receiver", "avr", "home theater", "surround", "dolby", "atmos", "dts", "auro"]
+  },
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Thomas Thaulow",
+    "email": "thaulow@thaulow.co"
+  },
+  "support": "mailto:thaulow@thaulow.co"
+}

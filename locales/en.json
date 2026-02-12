@@ -1,0 +1,41 @@
+{
+  "pair": {
+    "configure": {
+      "title": "Connect to Receiver",
+      "subtitle": "Enter the IP address of your JBL Synthesis receiver or serial bridge"
+    }
+  },
+  "settings": {
+    "ip": "IP Address",
+    "port": "TCP Port",
+    "model": "Model"
+  },
+  "capability": {
+    "input_source": "Input Source",
+    "decode_mode": "Surround Mode",
+    "direct_mode": "Direct Mode",
+    "bass": "Bass",
+    "treble": "Treble",
+    "balance": "Balance",
+    "room_eq": "Room EQ",
+    "dolby_audio": "Dolby Audio",
+    "subwoofer_trim": "Sub Trim",
+    "sub_stereo_trim": "Sub Stereo Trim",
+    "lipsync_delay": "Lip Sync",
+    "compression": "DRC",
+    "display_brightness": "Display",
+    "hdmi_output": "HDMI Output",
+    "imax_enhanced": "IMAX Enhanced",
+    "audio_format": "Audio Format",
+    "video_resolution": "Video Resolution",
+    "hdr_format": "HDR Format",
+    "sample_rate": "Sample Rate",
+    "now_playing_title": "Track",
+    "now_playing_artist": "Artist",
+    "now_playing_album": "Album",
+    "zone2_power": "Zone 2 Power",
+    "zone2_source": "Zone 2 Source",
+    "zone2_volume": "Zone 2 Volume",
+    "zone2_mute": "Zone 2 Mute"
+  }
+}

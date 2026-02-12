@@ -1,0 +1,28 @@
+{
+  "id": "zone2_set_source",
+  "title": { "en": "Zone 2: Set source to [[source]]" },
+  "titleFormatted": { "en": "Zone 2: Set source to [[source]]" },
+  "hint": { "en": "Set Zone 2 input source" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "source",
+      "type": "dropdown",
+      "title": { "en": "Source" },
+      "values": [
+        { "id": "cd", "label": { "en": "CD" } },
+        { "id": "bd", "label": { "en": "Blu-ray" } },
+        { "id": "av", "label": { "en": "AV" } },
+        { "id": "sat", "label": { "en": "SAT" } },
+        { "id": "fm", "label": { "en": "FM Tuner" } },
+        { "id": "dab", "label": { "en": "DAB Tuner" } },
+        { "id": "net", "label": { "en": "Network" } },
+        { "id": "bt", "label": { "en": "Bluetooth" } }
+      ]
+    }
+  ]
+}

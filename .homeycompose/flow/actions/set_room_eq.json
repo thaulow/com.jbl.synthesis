@@ -1,0 +1,24 @@
+{
+  "id": "set_room_eq",
+  "title": { "en": "Set Room EQ to [[preset]]" },
+  "titleFormatted": { "en": "Set Room EQ to [[preset]]" },
+  "hint": { "en": "Set the room equalization preset" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "preset",
+      "type": "dropdown",
+      "title": { "en": "Preset" },
+      "values": [
+        { "id": "off", "label": { "en": "Off" } },
+        { "id": "eq1", "label": { "en": "EQ 1" } },
+        { "id": "eq2", "label": { "en": "EQ 2" } },
+        { "id": "eq3", "label": { "en": "EQ 3" } }
+      ]
+    }
+  ]
+}

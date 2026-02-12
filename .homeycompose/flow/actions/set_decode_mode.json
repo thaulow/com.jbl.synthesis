@@ -1,0 +1,34 @@
+{
+  "id": "set_decode_mode",
+  "title": { "en": "Set surround mode to [[mode]]" },
+  "titleFormatted": { "en": "Set surround mode to [[mode]]" },
+  "hint": { "en": "Set the surround decode mode" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": { "en": "Mode" },
+      "values": [
+        { "id": "stereo", "label": { "en": "Stereo" } },
+        { "id": "dolby_surround", "label": { "en": "Dolby Surround" } },
+        { "id": "neo6_cinema", "label": { "en": "Neo:6 Cinema" } },
+        { "id": "neo6_music", "label": { "en": "Neo:6 Music" } },
+        { "id": "multi_stereo", "label": { "en": "5/7ch Stereo" } },
+        { "id": "neural_x", "label": { "en": "DTS Neural:X" } },
+        { "id": "virtual_x", "label": { "en": "DTS Virtual:X" } },
+        { "id": "dolby_virtual_height", "label": { "en": "Dolby Virtual Height" } },
+        { "id": "auro_native", "label": { "en": "Auro Native" } },
+        { "id": "auro_matic", "label": { "en": "Auro-Matic 3D" } },
+        { "id": "auro_2d", "label": { "en": "Auro-2D" } },
+        { "id": "multi_channel", "label": { "en": "Multi-Channel" } },
+        { "id": "mch_neural_x", "label": { "en": "MCH Neural:X" } },
+        { "id": "mch_dolby_surround", "label": { "en": "MCH Dolby Surround" } }
+      ]
+    }
+  ]
+}

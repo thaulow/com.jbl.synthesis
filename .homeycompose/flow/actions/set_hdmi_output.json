@@ -1,0 +1,23 @@
+{
+  "id": "set_hdmi_output",
+  "title": { "en": "Set HDMI output to [[output]]" },
+  "titleFormatted": { "en": "Set HDMI output to [[output]]" },
+  "hint": { "en": "Select which HDMI output(s) to use" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "output",
+      "type": "dropdown",
+      "title": { "en": "Output" },
+      "values": [
+        { "id": "out1", "label": { "en": "HDMI 1" } },
+        { "id": "out2", "label": { "en": "HDMI 2" } },
+        { "id": "both", "label": { "en": "Both" } }
+      ]
+    }
+  ]
+}

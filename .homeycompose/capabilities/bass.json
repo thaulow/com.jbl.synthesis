@@ -1,0 +1,11 @@
+{
+  "type": "number",
+  "title": { "en": "Bass" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider",
+  "min": -12,
+  "max": 12,
+  "step": 1,
+  "units": { "en": "dB" }
+}

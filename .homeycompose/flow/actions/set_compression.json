@@ -1,0 +1,23 @@
+{
+  "id": "set_compression",
+  "title": { "en": "Set DRC to [[mode]]" },
+  "titleFormatted": { "en": "Set DRC to [[mode]]" },
+  "hint": { "en": "Set dynamic range compression mode" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": { "en": "Mode" },
+      "values": [
+        { "id": "off", "label": { "en": "Off" } },
+        { "id": "medium", "label": { "en": "Medium" } },
+        { "id": "high", "label": { "en": "High" } }
+      ]
+    }
+  ]
+}

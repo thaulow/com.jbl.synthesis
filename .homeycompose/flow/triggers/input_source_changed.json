@@ -1,0 +1,20 @@
+{
+  "id": "input_source_changed",
+  "title": { "en": "Input source changed" },
+  "hint": { "en": "When the input source changes" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    }
+  ],
+  "tokens": [
+    {
+      "name": "source",
+      "type": "string",
+      "title": { "en": "Source" },
+      "example": { "en": "Blu-ray" }
+    }
+  ]
+}

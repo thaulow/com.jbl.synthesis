@@ -1,0 +1,22 @@
+{
+  "type": "enum",
+  "title": { "en": "Zone 2 Source" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "cd", "title": { "en": "CD" } },
+    { "id": "bd", "title": { "en": "Blu-ray" } },
+    { "id": "av", "title": { "en": "AV" } },
+    { "id": "sat", "title": { "en": "SAT" } },
+    { "id": "pvr", "title": { "en": "PVR" } },
+    { "id": "uhd", "title": { "en": "UHD" } },
+    { "id": "aux", "title": { "en": "AUX" } },
+    { "id": "fm", "title": { "en": "FM Tuner" } },
+    { "id": "dab", "title": { "en": "DAB Tuner" } },
+    { "id": "net", "title": { "en": "Network" } },
+    { "id": "stb", "title": { "en": "STB" } },
+    { "id": "game", "title": { "en": "Game" } },
+    { "id": "bt", "title": { "en": "Bluetooth" } }
+  ]
+}

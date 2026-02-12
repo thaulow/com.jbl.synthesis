@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+      color: #333;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #FF6900;
+    }
+    .hint {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+    }
+    .error {
+      color: #e74c3c;
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+    .button-container {
+      margin-top: 24px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #FF6900;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #e55d00;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .connecting {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      padding: 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>JBL Synthesis</h1>
+  <p class="subtitle">Connect to your receiver via IP or serial bridge</p>
+
+  <div class="form-group">
+    <label for="ip">IP Address</label>
+    <input type="text" id="ip" placeholder="192.168.1.100" autocomplete="off" />
+    <p class="hint">IP address of the receiver or serial-to-IP bridge</p>
+  </div>
+
+  <div class="form-group">
+    <label for="port">TCP Port</label>
+    <input type="number" id="port" value="50000" min="1" max="65535" />
+    <p class="hint">Default: 50000</p>
+  </div>
+
+  <div class="form-group">
+    <label for="model">Model</label>
+    <select id="model">
+      <option value="SDR-35">SDR-35</option>
+      <option value="SDR-38" selected>SDR-38</option>
+      <option value="SDP-55">SDP-55</option>
+      <option value="SDP-58">SDP-58</option>
+    </select>
+  </div>
+
+  <p class="error" id="error"></p>
+  <p class="connecting" id="connecting">Connecting to receiver...</p>
+
+  <div class="button-container">
+    <button id="connect" type="button">Connect</button>
+  </div>
+
+  <script>
+    var _homey = null;
+
+    function onHomeyReady(Homey) {
+      _homey = Homey;
+      Homey.ready();
+
+      document.getElementById('connect').addEventListener('click', function() {
+        var ip = document.getElementById('ip').value.trim();
+        var port = parseInt(document.getElementById('port').value) || 50000;
+        var model = document.getElementById('model').value;
+
+        if (!ip) {
+          showError('Please enter an IP address');
+          return;
+        }
+
+        // Basic IP validation
+        if (!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip) && !/^[a-zA-Z0-9.-]+$/.test(ip)) {
+          showError('Please enter a valid IP address or hostname');
+          return;
+        }
+
+        hideError();
+        setLoading(true);
+
+        Homey.emit('configure', { ip: ip, port: port, model: model }, function(err, result) {
+          setLoading(false);
+          if (err) {
+            showError(err.message || 'Could not connect to receiver');
+          } else {
+            Homey.nextView();
+          }
+        });
+      });
+    }
+
+    function showError(msg) {
+      var el = document.getElementById('error');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function hideError() {
+      document.getElementById('error').style.display = 'none';
+    }
+
+    function setLoading(loading) {
+      document.getElementById('connect').disabled = loading;
+      document.getElementById('connecting').style.display = loading ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

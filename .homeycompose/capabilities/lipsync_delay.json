@@ -1,0 +1,11 @@
+{
+  "type": "number",
+  "title": { "en": "Lip Sync" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider",
+  "min": 0,
+  "max": 250,
+  "step": 5,
+  "units": { "en": "ms" }
+}

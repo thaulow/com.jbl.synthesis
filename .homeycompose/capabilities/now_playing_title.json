@@ -1,0 +1,7 @@
+{
+  "type": "string",
+  "title": { "en": "Track" },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor"
+}

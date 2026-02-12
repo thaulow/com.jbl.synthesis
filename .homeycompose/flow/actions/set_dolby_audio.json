@@ -1,0 +1,24 @@
+{
+  "id": "set_dolby_audio",
+  "title": { "en": "Set Dolby Audio to [[mode]]" },
+  "titleFormatted": { "en": "Set Dolby Audio to [[mode]]" },
+  "hint": { "en": "Set the Dolby Audio processing mode" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": { "en": "Mode" },
+      "values": [
+        { "id": "off", "label": { "en": "Off" } },
+        { "id": "movie", "label": { "en": "Movie" } },
+        { "id": "music", "label": { "en": "Music" } },
+        { "id": "night", "label": { "en": "Night" } }
+      ]
+    }
+  ]
+}

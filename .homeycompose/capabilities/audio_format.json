@@ -1,0 +1,8 @@
+{
+  "type": "string",
+  "title": { "en": "Audio Format" },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "insights": true
+}

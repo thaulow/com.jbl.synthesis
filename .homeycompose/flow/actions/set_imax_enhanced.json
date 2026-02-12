@@ -1,0 +1,23 @@
+{
+  "id": "set_imax_enhanced",
+  "title": { "en": "Set IMAX Enhanced to [[mode]]" },
+  "titleFormatted": { "en": "Set IMAX Enhanced to [[mode]]" },
+  "hint": { "en": "Set the IMAX Enhanced mode" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "mode",
+      "type": "dropdown",
+      "title": { "en": "Mode" },
+      "values": [
+        { "id": "auto", "label": { "en": "Auto" } },
+        { "id": "on", "label": { "en": "On" } },
+        { "id": "off", "label": { "en": "Off" } }
+      ]
+    }
+  ]
+}

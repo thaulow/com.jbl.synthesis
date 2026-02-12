@@ -1,0 +1,27 @@
+{
+  "id": "playback_control",
+  "title": { "en": "Playback: [[action]]" },
+  "titleFormatted": { "en": "Playback: [[action]]" },
+  "hint": { "en": "Send a playback control command" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "action",
+      "type": "dropdown",
+      "title": { "en": "Action" },
+      "values": [
+        { "id": "play", "label": { "en": "Play" } },
+        { "id": "pause", "label": { "en": "Pause" } },
+        { "id": "stop", "label": { "en": "Stop" } },
+        { "id": "skip_forward", "label": { "en": "Skip Forward" } },
+        { "id": "skip_back", "label": { "en": "Skip Back" } },
+        { "id": "fast_forward", "label": { "en": "Fast Forward" } },
+        { "id": "rewind", "label": { "en": "Rewind" } }
+      ]
+    }
+  ]
+}

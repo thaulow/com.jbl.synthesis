@@ -1,0 +1,8 @@
+{
+  "type": "boolean",
+  "title": { "en": "Direct Mode" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "toggle",
+  "insights": true
+}

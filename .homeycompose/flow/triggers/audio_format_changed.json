@@ -1,0 +1,20 @@
+{
+  "id": "audio_format_changed",
+  "title": { "en": "Audio format changed" },
+  "hint": { "en": "When the incoming audio format changes" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    }
+  ],
+  "tokens": [
+    {
+      "name": "format",
+      "type": "string",
+      "title": { "en": "Format" },
+      "example": { "en": "Dolby Atmos" }
+    }
+  ]
+}

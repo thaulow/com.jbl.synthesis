@@ -1,0 +1,13 @@
+{
+  "type": "enum",
+  "title": { "en": "Dolby Audio" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "off", "title": { "en": "Off" } },
+    { "id": "movie", "title": { "en": "Movie" } },
+    { "id": "music", "title": { "en": "Music" } },
+    { "id": "night", "title": { "en": "Night" } }
+  ]
+}

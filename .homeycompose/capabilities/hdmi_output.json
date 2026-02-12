@@ -1,0 +1,12 @@
+{
+  "type": "enum",
+  "title": { "en": "HDMI Output" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "out1", "title": { "en": "HDMI 1" } },
+    { "id": "out2", "title": { "en": "HDMI 2" } },
+    { "id": "both", "title": { "en": "Both" } }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "set_input_source",
+  "title": { "en": "Set input to [[source]]" },
+  "titleFormatted": { "en": "Set input to [[source]]" },
+  "hint": { "en": "Select an input source on the receiver" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "source",
+      "type": "dropdown",
+      "title": { "en": "Source" },
+      "values": [
+        { "id": "cd", "label": { "en": "CD" } },
+        { "id": "bd", "label": { "en": "Blu-ray" } },
+        { "id": "av", "label": { "en": "AV" } },
+        { "id": "sat", "label": { "en": "SAT" } },
+        { "id": "pvr", "label": { "en": "PVR" } },
+        { "id": "uhd", "label": { "en": "UHD" } },
+        { "id": "aux", "label": { "en": "AUX" } },
+        { "id": "display", "label": { "en": "Display" } },
+        { "id": "fm", "label": { "en": "FM Tuner" } },
+        { "id": "dab", "label": { "en": "DAB Tuner" } },
+        { "id": "net", "label": { "en": "Network" } },
+        { "id": "stb", "label": { "en": "STB" } },
+        { "id": "game", "label": { "en": "Game" } },
+        { "id": "bt", "label": { "en": "Bluetooth" } }
+      ]
+    }
+  ]
+}

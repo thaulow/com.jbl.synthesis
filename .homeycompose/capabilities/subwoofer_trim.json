@@ -1,0 +1,11 @@
+{
+  "type": "number",
+  "title": { "en": "Sub Trim" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "slider",
+  "min": -10,
+  "max": 10,
+  "step": 0.5,
+  "units": { "en": "dB" }
+}

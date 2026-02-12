@@ -1,0 +1,21 @@
+{
+  "id": "set_treble",
+  "title": { "en": "Set treble to [[value]] dB" },
+  "titleFormatted": { "en": "Set treble to [[value]] dB" },
+  "hint": { "en": "Adjust the treble level (-12 to +12 dB)" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "value",
+      "type": "range",
+      "title": { "en": "Treble (dB)" },
+      "min": -12,
+      "max": 12,
+      "step": 1
+    }
+  ]
+}

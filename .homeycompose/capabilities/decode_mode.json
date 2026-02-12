@@ -1,0 +1,29 @@
+{
+  "type": "enum",
+  "title": { "en": "Surround Mode" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "stereo", "title": { "en": "Stereo" } },
+    { "id": "dolby_surround", "title": { "en": "Dolby Surround" } },
+    { "id": "neo6_cinema", "title": { "en": "Neo:6 Cinema" } },
+    { "id": "neo6_music", "title": { "en": "Neo:6 Music" } },
+    { "id": "multi_stereo", "title": { "en": "5/7ch Stereo" } },
+    { "id": "neural_x", "title": { "en": "DTS Neural:X" } },
+    { "id": "virtual_x", "title": { "en": "DTS Virtual:X" } },
+    { "id": "dolby_virtual_height", "title": { "en": "Dolby Virtual Height" } },
+    { "id": "auro_native", "title": { "en": "Auro Native" } },
+    { "id": "auro_matic", "title": { "en": "Auro-Matic 3D" } },
+    { "id": "auro_2d", "title": { "en": "Auro-2D" } },
+    { "id": "stereo_downmix", "title": { "en": "Stereo Downmix" } },
+    { "id": "multi_channel", "title": { "en": "Multi-Channel" } },
+    { "id": "mch_neural_x", "title": { "en": "MCH Neural:X" } },
+    { "id": "mch_dolby_surround", "title": { "en": "MCH Dolby Surround" } },
+    { "id": "mch_virtual_x", "title": { "en": "MCH Virtual:X" } },
+    { "id": "mch_dolby_virtual_height", "title": { "en": "MCH Dolby VH" } },
+    { "id": "mch_auro_native", "title": { "en": "MCH Auro Native" } },
+    { "id": "mch_auro_matic", "title": { "en": "MCH Auro-Matic" } },
+    { "id": "mch_auro_2d", "title": { "en": "MCH Auro-2D" } }
+  ]
+}

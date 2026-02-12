@@ -1,0 +1,120 @@
+{
+  "name": {
+    "en": "JBL Synthesis Receiver"
+  },
+  "class": "speaker",
+  "capabilities": [
+    "onoff",
+    "volume_set",
+    "volume_mute",
+    "input_source",
+    "decode_mode",
+    "direct_mode",
+    "bass",
+    "treble",
+    "balance",
+    "room_eq",
+    "dolby_audio",
+    "subwoofer_trim",
+    "sub_stereo_trim",
+    "lipsync_delay",
+    "compression",
+    "display_brightness",
+    "hdmi_output",
+    "imax_enhanced",
+    "audio_format",
+    "video_resolution",
+    "hdr_format",
+    "sample_rate",
+    "now_playing_title",
+    "now_playing_artist",
+    "now_playing_album",
+    "zone2_power",
+    "zone2_source",
+    "zone2_volume",
+    "zone2_mute"
+  ],
+  "capabilitiesOptions": {
+    "onoff": {
+      "title": { "en": "Power" }
+    },
+    "volume_set": {
+      "title": { "en": "Volume" },
+      "min": 0,
+      "max": 1,
+      "step": 0.01
+    },
+    "volume_mute": {
+      "title": { "en": "Mute" }
+    }
+  },
+  "pair": [
+    {
+      "id": "configure",
+      "navigation": {
+        "next": "list_devices"
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "repair": [
+    {
+      "id": "configure"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": { "en": "Connection" },
+      "children": [
+        {
+          "id": "ip",
+          "type": "text",
+          "label": { "en": "IP Address" },
+          "hint": { "en": "IP address of the receiver or serial bridge" },
+          "value": ""
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "label": { "en": "TCP Port" },
+          "hint": { "en": "TCP port (default 50000)" },
+          "value": 50000
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": { "en": "Device" },
+      "children": [
+        {
+          "id": "model",
+          "type": "dropdown",
+          "label": { "en": "Model" },
+          "hint": { "en": "JBL Synthesis model" },
+          "value": "SDR-38",
+          "values": [
+            { "id": "SDR-35", "label": { "en": "SDR-35" } },
+            { "id": "SDR-38", "label": { "en": "SDR-38" } },
+            { "id": "SDP-55", "label": { "en": "SDP-55" } },
+            { "id": "SDP-58", "label": { "en": "SDP-58" } }
+          ]
+        }
+      ]
+    }
+  ],
+  "images": {
+    "small": "/drivers/receiver/assets/images/small.png",
+    "large": "/drivers/receiver/assets/images/large.png"
+  }
+}

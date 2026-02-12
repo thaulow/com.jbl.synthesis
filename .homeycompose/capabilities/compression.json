@@ -1,0 +1,12 @@
+{
+  "type": "enum",
+  "title": { "en": "DRC" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "off", "title": { "en": "Off" } },
+    { "id": "medium", "title": { "en": "Medium" } },
+    { "id": "high", "title": { "en": "High" } }
+  ]
+}

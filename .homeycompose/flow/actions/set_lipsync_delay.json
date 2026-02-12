@@ -1,0 +1,21 @@
+{
+  "id": "set_lipsync_delay",
+  "title": { "en": "Set lip sync to [[value]] ms" },
+  "titleFormatted": { "en": "Set lip sync to [[value]] ms" },
+  "hint": { "en": "Adjust the lip sync delay (0-250 ms)" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "value",
+      "type": "range",
+      "title": { "en": "Delay (ms)" },
+      "min": 0,
+      "max": 250,
+      "step": 5
+    }
+  ]
+}

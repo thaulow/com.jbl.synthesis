@@ -1,0 +1,12 @@
+{
+  "type": "enum",
+  "title": { "en": "IMAX Enhanced" },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    { "id": "auto", "title": { "en": "Auto" } },
+    { "id": "on", "title": { "en": "On" } },
+    { "id": "off", "title": { "en": "Off" } }
+  ]
+}

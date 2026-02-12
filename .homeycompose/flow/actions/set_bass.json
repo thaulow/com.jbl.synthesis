@@ -1,0 +1,21 @@
+{
+  "id": "set_bass",
+  "title": { "en": "Set bass to [[value]] dB" },
+  "titleFormatted": { "en": "Set bass to [[value]] dB" },
+  "hint": { "en": "Adjust the bass level (-12 to +12 dB)" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "value",
+      "type": "range",
+      "title": { "en": "Bass (dB)" },
+      "min": -12,
+      "max": 12,
+      "step": 1
+    }
+  ]
+}

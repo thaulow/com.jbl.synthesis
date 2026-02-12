@@ -1,0 +1,21 @@
+{
+  "id": "set_subwoofer_trim",
+  "title": { "en": "Set sub trim to [[value]] dB" },
+  "titleFormatted": { "en": "Set sub trim to [[value]] dB" },
+  "hint": { "en": "Adjust the subwoofer trim level (-10 to +10 dB)" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    },
+    {
+      "name": "value",
+      "type": "range",
+      "title": { "en": "Sub Trim (dB)" },
+      "min": -10,
+      "max": 10,
+      "step": 0.5
+    }
+  ]
+}

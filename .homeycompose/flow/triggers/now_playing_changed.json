@@ -1,0 +1,26 @@
+{
+  "id": "now_playing_changed",
+  "title": { "en": "Now playing changed" },
+  "hint": { "en": "When the currently playing track changes" },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=receiver"
+    }
+  ],
+  "tokens": [
+    {
+      "name": "title",
+      "type": "string",
+      "title": { "en": "Title" },
+      "example": { "en": "Song Name" }
+    },
+    {
+      "name": "artist",
+      "type": "string",
+      "title": { "en": "Artist" },
+      "example": { "en": "Artist Name" }
+    }
+  ]
+}
