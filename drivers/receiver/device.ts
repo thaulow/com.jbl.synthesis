@@ -104,7 +104,7 @@ class JblSynthesisDevice extends Homey.Device {
     // Power
     this.registerCapabilityListener('onoff', async (value: boolean) => {
       const rc5cmd = value ? RC5.POWER_ON : RC5.POWER_OFF;
-      await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
+      this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
       this.isPowered = value;
       this.restartPolling();
     });
@@ -118,27 +118,34 @@ class JblSynthesisDevice extends Homey.Device {
     // Volume Up/Down
     if (this.hasCapability('volume_up')) {
       this.registerCapabilityListener('volume_up', async () => {
-        await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, RC5.VOL_UP);
+        this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, RC5.VOL_UP);
       });
     }
     if (this.hasCapability('volume_down')) {
       this.registerCapabilityListener('volume_down', async () => {
-        await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, RC5.VOL_DOWN);
+        this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, RC5.VOL_DOWN);
       });
     }
 
     // Mute
     this.registerCapabilityListener('volume_mute', async (value: boolean) => {
       const rc5cmd = value ? RC5.MUTE_ON : RC5.MUTE_OFF;
-      await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
+      this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
     });
 
-    // Input source
+    // Input source (use RC5 commands - direct CURRENT_SOURCE is query-only)
     if (this.hasCapability('input_source')) {
       this.registerCapabilityListener('input_source', async (value: string) => {
-        const sourceId = INPUT_SOURCE_MAP[value];
-        if (sourceId !== undefined) {
-          await this.connection.sendCommand(Zone.MASTER, Cmd.CURRENT_SOURCE, [sourceId]);
+        const rc5Map: Record<string, number> = {
+          cd: RC5.INPUT_CD, bd: RC5.INPUT_BD, av: RC5.INPUT_AV,
+          sat: RC5.INPUT_SAT, pvr: RC5.INPUT_PVR, uhd: RC5.INPUT_UHD,
+          aux: RC5.INPUT_AUX, fm: RC5.INPUT_FM, dab: RC5.INPUT_DAB,
+          net: RC5.INPUT_NET, stb: RC5.INPUT_STB, game: RC5.INPUT_GAME,
+          bt: RC5.INPUT_BT,
+        };
+        const rc5cmd = rc5Map[value];
+        if (rc5cmd !== undefined) {
+          this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
         }
       });
     }
@@ -158,7 +165,7 @@ class JblSynthesisDevice extends Homey.Device {
     if (this.hasCapability('direct_mode')) {
       this.registerCapabilityListener('direct_mode', async (value: boolean) => {
         const rc5cmd = value ? RC5.DIRECT_ON : RC5.DIRECT_OFF;
-        await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
+        this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
       });
     }
 
@@ -253,7 +260,7 @@ class JblSynthesisDevice extends Homey.Device {
         const rc5cmds: Record<string, number> = { off: RC5.DISPLAY_OFF, dim: RC5.DISPLAY_L1, bright: RC5.DISPLAY_L2 };
         const rc5cmd = rc5cmds[value];
         if (rc5cmd !== undefined) {
-          await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
+          this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, rc5cmd);
         }
       });
     }
@@ -285,7 +292,7 @@ class JblSynthesisDevice extends Homey.Device {
     if (this.hasCapability('zone2_power')) {
       this.registerCapabilityListener('zone2_power', async (value: boolean) => {
         const rc5cmd = value ? RC5.Z2_POWER_ON : RC5.Z2_POWER_OFF;
-        await this.connection.sendRC5(Zone.ZONE2, RC5.SYSTEM_ZONE2, rc5cmd);
+        this.connection.sendRC5(Zone.ZONE2, RC5.SYSTEM_ZONE2, rc5cmd);
       });
     }
 
@@ -299,15 +306,20 @@ class JblSynthesisDevice extends Homey.Device {
     if (this.hasCapability('zone2_mute')) {
       this.registerCapabilityListener('zone2_mute', async (value: boolean) => {
         const rc5cmd = value ? RC5.Z2_MUTE : RC5.Z2_MUTE;
-        await this.connection.sendRC5(Zone.ZONE2, RC5.SYSTEM_ZONE2, rc5cmd);
+        this.connection.sendRC5(Zone.ZONE2, RC5.SYSTEM_ZONE2, rc5cmd);
       });
     }
 
     if (this.hasCapability('zone2_source')) {
       this.registerCapabilityListener('zone2_source', async (value: string) => {
-        const sourceId = INPUT_SOURCE_MAP[value];
-        if (sourceId !== undefined) {
-          await this.connection.sendCommand(Zone.ZONE2, Cmd.CURRENT_SOURCE, [sourceId]);
+        const rc5Map: Record<string, number> = {
+          cd: RC5.INPUT_CD, bd: RC5.INPUT_BD, av: RC5.INPUT_AV,
+          sat: RC5.INPUT_SAT, fm: RC5.INPUT_FM, dab: RC5.INPUT_DAB,
+          net: RC5.INPUT_NET, bt: RC5.INPUT_BT,
+        };
+        const rc5cmd = rc5Map[value];
+        if (rc5cmd !== undefined) {
+          this.connection.sendRC5(Zone.ZONE2, RC5.SYSTEM_ZONE2, rc5cmd);
         }
       });
     }
@@ -739,7 +751,7 @@ class JblSynthesisDevice extends Homey.Device {
   // ── Public methods for Flow actions ─────────────────────────────────────
 
   async sendRC5Command(system: number, command: number): Promise<void> {
-    await this.connection.sendRC5(Zone.MASTER, system, command);
+    this.connection.sendRC5(Zone.MASTER, system, command);
   }
 
   async sendPlaybackCommand(action: string): Promise<void> {
@@ -754,7 +766,7 @@ class JblSynthesisDevice extends Homey.Device {
     };
     const cmd = commands[action];
     if (cmd !== undefined) {
-      await this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, cmd);
+      this.connection.sendRC5(Zone.MASTER, RC5.SYSTEM_MAIN, cmd);
     }
   }
 }

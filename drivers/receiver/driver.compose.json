@@ -50,10 +50,7 @@
   },
   "pair": [
     {
-      "id": "configure",
-      "navigation": {
-        "next": "list_devices"
-      }
+      "id": "configure"
     },
     {
       "id": "list_devices",

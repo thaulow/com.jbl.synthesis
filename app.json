@@ -11,7 +11,7 @@
     "en": "JBL Synthesis"
   },
   "description": {
-    "en": "Control your JBL Synthesis receiver (SDR-35, SDR-38, SDP-55, SDP-58)"
+    "en": "JBL Synthesis brings award-winning sound to your home."
   },
   "brandColor": "#000000",
   "category": [
@@ -1157,10 +1157,7 @@
       },
       "pair": [
         {
-          "id": "configure",
-          "navigation": {
-            "next": "list_devices"
-          }
+          "id": "configure"
         },
         {
           "id": "list_devices",

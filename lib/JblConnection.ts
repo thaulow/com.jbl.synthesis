@@ -146,11 +146,13 @@ export class JblConnection extends EventEmitter {
   }
 
   /**
-   * Send an RC5 IR command.
+   * Send an RC5 IR command (fire-and-forget).
+   * RC5 simulations may not produce a timely response,
+   * so we write directly without waiting.
    */
-  async sendRC5(zone: Zone, system: number, command: number): Promise<JblResponse> {
+  sendRC5(zone: Zone, system: number, command: number): void {
     const buffer = buildRC5(zone, system, command);
-    return this.enqueue(buffer);
+    this.sendRaw(buffer);
   }
 
   /**
@@ -170,6 +172,18 @@ export class JblConnection extends EventEmitter {
   }
 
   // ── Private Methods ───────────────────────────────────────────────────────
+
+  /**
+   * Write raw bytes to the socket without queuing or waiting for a response.
+   */
+  private sendRaw(buffer: Buffer): void {
+    if (!this._connected || !this.socket) return;
+    try {
+      this.socket.write(buffer);
+    } catch (_err) {
+      // Ignore write errors on fire-and-forget
+    }
+  }
 
   private enqueue(buffer: Buffer): Promise<JblResponse> {
     return new Promise((resolve, reject) => {
@@ -212,7 +226,10 @@ export class JblConnection extends EventEmitter {
   }
 
   private onData(data: Buffer): void {
-    this.receiveBuffer = Buffer.concat([this.receiveBuffer, data]);
+    // Filter out spurious null bytes that some devices send
+    const filtered = Buffer.from(data.filter((b) => b !== 0x00));
+    if (filtered.length === 0) return;
+    this.receiveBuffer = Buffer.concat([this.receiveBuffer, filtered]);
 
     // Process all complete messages in the buffer
     let result = parseResponse(this.receiveBuffer);
@@ -231,8 +248,8 @@ export class JblConnection extends EventEmitter {
         }
 
         this.currentCommand = null;
-        // Small delay between commands to not overwhelm the device
-        setTimeout(() => this.processQueue(), 50);
+        // Throttle between commands to not overwhelm the device (matches Arcam library)
+        setTimeout(() => this.processQueue(), 200);
       } else {
         // Unsolicited status update
         this.emit('status', response);
@@ -250,7 +267,8 @@ export class JblConnection extends EventEmitter {
   private startHeartbeat(): void {
     this.stopHeartbeat();
     this.heartbeatTimer = setInterval(() => {
-      this.query(Zone.MASTER, Cmd.HEARTBEAT).catch(() => {
+      // Use POWER query as heartbeat (matches Arcam library behavior)
+      this.query(Zone.MASTER, Cmd.POWER).catch(() => {
         // Heartbeat failure will trigger reconnect via socket close
       });
     }, this.options.heartbeatInterval);

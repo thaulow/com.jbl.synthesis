@@ -1,62 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
+<div>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      margin: 0;
-      padding: 24px;
-      color: #333;
-    }
-    h1 {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .subtitle {
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 24px;
-    }
-    .form-group {
+    #jbl-configure .form-group {
       margin-bottom: 16px;
     }
-    label {
+    #jbl-configure label {
       display: block;
       font-size: 13px;
       font-weight: 500;
       margin-bottom: 6px;
-      color: #555;
+      opacity: 0.7;
     }
-    input, select {
+    #jbl-configure input,
+    #jbl-configure select {
       width: 100%;
       padding: 10px 12px;
-      border: 1px solid #ddd;
+      border: 1px solid rgba(150,150,150,0.3);
       border-radius: 8px;
       font-size: 15px;
       box-sizing: border-box;
-      background: #fff;
-      transition: border-color 0.2s;
+      background: rgba(150,150,150,0.1);
+      color: inherit;
     }
-    input:focus, select:focus {
-      outline: none;
-      border-color: #FF6900;
-    }
-    .hint {
+    #jbl-configure .hint {
       font-size: 11px;
-      color: #999;
+      opacity: 0.5;
       margin-top: 4px;
     }
-    .error {
+    #jbl-configure .error {
       color: #e74c3c;
       font-size: 13px;
       margin-top: 12px;
       display: none;
     }
-    .button-container {
+    #jbl-configure .connecting {
+      text-align: center;
+      opacity: 0.6;
+      font-size: 14px;
+      padding: 12px;
+      display: none;
+    }
+    #jbl-configure .button-container {
       margin-top: 24px;
     }
-    button {
+    #jbl-configure button {
       width: 100%;
       padding: 12px;
       background: #FF6900;
@@ -66,76 +52,61 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
     }
-    button:hover {
-      background: #e55d00;
-    }
-    button:disabled {
-      background: #ccc;
+    #jbl-configure button:disabled {
+      background: #888;
       cursor: not-allowed;
     }
-    .connecting {
-      text-align: center;
-      color: #888;
-      font-size: 14px;
-      padding: 12px;
-      display: none;
-    }
   </style>
-</head>
-<body>
-  <h1>JBL Synthesis</h1>
-  <p class="subtitle">Connect to your receiver via IP or serial bridge</p>
 
-  <div class="form-group">
-    <label for="ip">IP Address</label>
-    <input type="text" id="ip" placeholder="192.168.1.100" autocomplete="off" />
-    <p class="hint">IP address of the receiver or serial-to-IP bridge</p>
+  <div id="jbl-configure">
+    <div class="form-group">
+      <label>IP ADDRESS</label>
+      <input type="text" id="jbl-ip" placeholder="192.168.1.100" autocomplete="off" />
+      <p class="hint">IP address of the receiver or serial-to-IP bridge</p>
+    </div>
+
+    <div class="form-group">
+      <label>TCP PORT</label>
+      <input type="number" id="jbl-port" value="50000" min="1" max="65535" />
+      <p class="hint">Default: 50000</p>
+    </div>
+
+    <div class="form-group">
+      <label>MODEL</label>
+      <select id="jbl-model">
+        <option value="SDR-35">SDR-35</option>
+        <option value="SDR-38" selected>SDR-38</option>
+        <option value="SDP-55">SDP-55</option>
+        <option value="SDP-58">SDP-58</option>
+      </select>
+    </div>
+
+    <p class="error" id="jbl-error"></p>
+    <p class="connecting" id="jbl-connecting">Connecting to receiver...</p>
+
+    <div class="button-container">
+      <button type="button" id="jbl-connect">Connect</button>
+    </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="port">TCP Port</label>
-    <input type="number" id="port" value="50000" min="1" max="65535" />
-    <p class="hint">Default: 50000</p>
-  </div>
-
-  <div class="form-group">
-    <label for="model">Model</label>
-    <select id="model">
-      <option value="SDR-35">SDR-35</option>
-      <option value="SDR-38" selected>SDR-38</option>
-      <option value="SDP-55">SDP-55</option>
-      <option value="SDP-58">SDP-58</option>
-    </select>
-  </div>
-
-  <p class="error" id="error"></p>
-  <p class="connecting" id="connecting">Connecting to receiver...</p>
-
-  <div class="button-container">
-    <button id="connect" type="button">Connect</button>
-  </div>
-
-  <script>
-    var _homey = null;
-
-    function onHomeyReady(Homey) {
-      _homey = Homey;
+<script>
+  (function() {
+    function init(Homey) {
       Homey.ready();
 
-      document.getElementById('connect').addEventListener('click', function() {
-        var ip = document.getElementById('ip').value.trim();
-        var port = parseInt(document.getElementById('port').value) || 50000;
-        var model = document.getElementById('model').value;
+      document.getElementById('jbl-connect').addEventListener('click', function() {
+        var ip = document.getElementById('jbl-ip').value.trim();
+        var port = parseInt(document.getElementById('jbl-port').value) || 50000;
+        var model = document.getElementById('jbl-model').value;
 
         if (!ip) {
           showError('Please enter an IP address');
           return;
         }
 
-        // Basic IP validation
-        if (!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip) && !/^[a-zA-Z0-9.-]+$/.test(ip)) {
+        if (!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip) && !/^[a-zA-Z0-9.\-]+$/.test(ip)) {
           showError('Please enter a valid IP address or hostname');
           return;
         }
@@ -148,26 +119,39 @@
           if (err) {
             showError(err.message || 'Could not connect to receiver');
           } else {
-            Homey.nextView();
+            Homey.showView('list_devices');
           }
         });
       });
     }
 
     function showError(msg) {
-      var el = document.getElementById('error');
+      var el = document.getElementById('jbl-error');
       el.textContent = msg;
       el.style.display = 'block';
     }
 
     function hideError() {
-      document.getElementById('error').style.display = 'none';
+      document.getElementById('jbl-error').style.display = 'none';
     }
 
     function setLoading(loading) {
-      document.getElementById('connect').disabled = loading;
-      document.getElementById('connecting').style.display = loading ? 'block' : 'none';
+      document.getElementById('jbl-connect').disabled = loading;
+      document.getElementById('jbl-connecting').style.display = loading ? 'block' : 'none';
     }
-  </script>
-</body>
-</html>
+
+    // Homey injects the API as a global. Try it directly, fall back to onHomeyReady, or poll.
+    if (typeof Homey !== 'undefined') {
+      init(Homey);
+    } else {
+      window.onHomeyReady = function(h) { init(h); };
+      // Also poll in case neither method fires
+      var poll = setInterval(function() {
+        if (typeof Homey !== 'undefined') {
+          clearInterval(poll);
+          init(Homey);
+        }
+      }, 200);
+    }
+  })();
+</script>
