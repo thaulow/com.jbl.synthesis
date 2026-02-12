@@ -1,3 +1,1966 @@
 {
-  "_comment": "This file is generated. Please edit .homeycompose/app.json instead."
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.jbl.synthesis",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "JBL Synthesis"
+  },
+  "description": {
+    "en": "Control your JBL Synthesis receiver (SDR-35, SDR-38, SDP-55, SDP-58)"
+  },
+  "brandColor": "#000000",
+  "category": [
+    "music"
+  ],
+  "tags": {
+    "en": [
+      "jbl",
+      "synthesis",
+      "receiver",
+      "avr",
+      "home theater",
+      "surround",
+      "dolby",
+      "atmos",
+      "dts",
+      "auro"
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Thomas Thaulow",
+    "email": "thaulow@thaulow.co"
+  },
+  "support": "mailto:thaulow@thaulow.co",
+  "flow": {
+    "triggers": [
+      {
+        "id": "audio_format_changed",
+        "title": {
+          "en": "Audio format changed"
+        },
+        "hint": {
+          "en": "When the incoming audio format changes"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "format",
+            "type": "string",
+            "title": {
+              "en": "Format"
+            },
+            "example": {
+              "en": "Dolby Atmos"
+            }
+          }
+        ]
+      },
+      {
+        "id": "input_source_changed",
+        "title": {
+          "en": "Input source changed"
+        },
+        "hint": {
+          "en": "When the input source changes"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source"
+            },
+            "example": {
+              "en": "Blu-ray"
+            }
+          }
+        ]
+      },
+      {
+        "id": "now_playing_changed",
+        "title": {
+          "en": "Now playing changed"
+        },
+        "hint": {
+          "en": "When the currently playing track changes"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": {
+              "en": "Title"
+            },
+            "example": {
+              "en": "Song Name"
+            }
+          },
+          {
+            "name": "artist",
+            "type": "string",
+            "title": {
+              "en": "Artist"
+            },
+            "example": {
+              "en": "Artist Name"
+            }
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "is_playing_source",
+        "title": {
+          "en": "Source is [[source]]"
+        },
+        "titleFormatted": {
+          "en": "Source is [[source]]"
+        },
+        "hint": {
+          "en": "Check if the current input source matches"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "source",
+            "type": "dropdown",
+            "title": {
+              "en": "Source"
+            },
+            "values": [
+              {
+                "id": "cd",
+                "label": {
+                  "en": "CD"
+                }
+              },
+              {
+                "id": "bd",
+                "label": {
+                  "en": "Blu-ray"
+                }
+              },
+              {
+                "id": "av",
+                "label": {
+                  "en": "AV"
+                }
+              },
+              {
+                "id": "sat",
+                "label": {
+                  "en": "SAT"
+                }
+              },
+              {
+                "id": "pvr",
+                "label": {
+                  "en": "PVR"
+                }
+              },
+              {
+                "id": "uhd",
+                "label": {
+                  "en": "UHD"
+                }
+              },
+              {
+                "id": "aux",
+                "label": {
+                  "en": "AUX"
+                }
+              },
+              {
+                "id": "display",
+                "label": {
+                  "en": "Display"
+                }
+              },
+              {
+                "id": "fm",
+                "label": {
+                  "en": "FM Tuner"
+                }
+              },
+              {
+                "id": "dab",
+                "label": {
+                  "en": "DAB Tuner"
+                }
+              },
+              {
+                "id": "net",
+                "label": {
+                  "en": "Network"
+                }
+              },
+              {
+                "id": "stb",
+                "label": {
+                  "en": "STB"
+                }
+              },
+              {
+                "id": "game",
+                "label": {
+                  "en": "Game"
+                }
+              },
+              {
+                "id": "bt",
+                "label": {
+                  "en": "Bluetooth"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "playback_control",
+        "title": {
+          "en": "Playback: [[action]]"
+        },
+        "titleFormatted": {
+          "en": "Playback: [[action]]"
+        },
+        "hint": {
+          "en": "Send a playback control command"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "action",
+            "type": "dropdown",
+            "title": {
+              "en": "Action"
+            },
+            "values": [
+              {
+                "id": "play",
+                "label": {
+                  "en": "Play"
+                }
+              },
+              {
+                "id": "pause",
+                "label": {
+                  "en": "Pause"
+                }
+              },
+              {
+                "id": "stop",
+                "label": {
+                  "en": "Stop"
+                }
+              },
+              {
+                "id": "skip_forward",
+                "label": {
+                  "en": "Skip Forward"
+                }
+              },
+              {
+                "id": "skip_back",
+                "label": {
+                  "en": "Skip Back"
+                }
+              },
+              {
+                "id": "fast_forward",
+                "label": {
+                  "en": "Fast Forward"
+                }
+              },
+              {
+                "id": "rewind",
+                "label": {
+                  "en": "Rewind"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "send_rc5_command",
+        "title": {
+          "en": "Send RC5 command"
+        },
+        "titleFormatted": {
+          "en": "Send RC5 system [[system]] command [[command]]"
+        },
+        "hint": {
+          "en": "Send a raw RC5 IR command (advanced)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "system",
+            "type": "number",
+            "title": {
+              "en": "System"
+            },
+            "min": 0,
+            "max": 31,
+            "step": 1
+          },
+          {
+            "name": "command",
+            "type": "number",
+            "title": {
+              "en": "Command"
+            },
+            "min": 0,
+            "max": 127,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "set_bass",
+        "title": {
+          "en": "Set bass to [[value]] dB"
+        },
+        "titleFormatted": {
+          "en": "Set bass to [[value]] dB"
+        },
+        "hint": {
+          "en": "Adjust the bass level (-12 to +12 dB)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "value",
+            "type": "range",
+            "title": {
+              "en": "Bass (dB)"
+            },
+            "min": -12,
+            "max": 12,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "set_compression",
+        "title": {
+          "en": "Set DRC to [[mode]]"
+        },
+        "titleFormatted": {
+          "en": "Set DRC to [[mode]]"
+        },
+        "hint": {
+          "en": "Set dynamic range compression mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_decode_mode",
+        "title": {
+          "en": "Set surround mode to [[mode]]"
+        },
+        "titleFormatted": {
+          "en": "Set surround mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the surround decode mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "stereo",
+                "label": {
+                  "en": "Stereo"
+                }
+              },
+              {
+                "id": "dolby_surround",
+                "label": {
+                  "en": "Dolby Surround"
+                }
+              },
+              {
+                "id": "neo6_cinema",
+                "label": {
+                  "en": "Neo:6 Cinema"
+                }
+              },
+              {
+                "id": "neo6_music",
+                "label": {
+                  "en": "Neo:6 Music"
+                }
+              },
+              {
+                "id": "multi_stereo",
+                "label": {
+                  "en": "5/7ch Stereo"
+                }
+              },
+              {
+                "id": "neural_x",
+                "label": {
+                  "en": "DTS Neural:X"
+                }
+              },
+              {
+                "id": "virtual_x",
+                "label": {
+                  "en": "DTS Virtual:X"
+                }
+              },
+              {
+                "id": "dolby_virtual_height",
+                "label": {
+                  "en": "Dolby Virtual Height"
+                }
+              },
+              {
+                "id": "auro_native",
+                "label": {
+                  "en": "Auro Native"
+                }
+              },
+              {
+                "id": "auro_matic",
+                "label": {
+                  "en": "Auro-Matic 3D"
+                }
+              },
+              {
+                "id": "auro_2d",
+                "label": {
+                  "en": "Auro-2D"
+                }
+              },
+              {
+                "id": "multi_channel",
+                "label": {
+                  "en": "Multi-Channel"
+                }
+              },
+              {
+                "id": "mch_neural_x",
+                "label": {
+                  "en": "MCH Neural:X"
+                }
+              },
+              {
+                "id": "mch_dolby_surround",
+                "label": {
+                  "en": "MCH Dolby Surround"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_display_brightness",
+        "title": {
+          "en": "Set display to [[level]]"
+        },
+        "titleFormatted": {
+          "en": "Set display to [[level]]"
+        },
+        "hint": {
+          "en": "Set the front panel display brightness"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "level",
+            "type": "dropdown",
+            "title": {
+              "en": "Brightness"
+            },
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "dim",
+                "label": {
+                  "en": "Dim"
+                }
+              },
+              {
+                "id": "bright",
+                "label": {
+                  "en": "Bright"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_dolby_audio",
+        "title": {
+          "en": "Set Dolby Audio to [[mode]]"
+        },
+        "titleFormatted": {
+          "en": "Set Dolby Audio to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the Dolby Audio processing mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "movie",
+                "label": {
+                  "en": "Movie"
+                }
+              },
+              {
+                "id": "music",
+                "label": {
+                  "en": "Music"
+                }
+              },
+              {
+                "id": "night",
+                "label": {
+                  "en": "Night"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_hdmi_output",
+        "title": {
+          "en": "Set HDMI output to [[output]]"
+        },
+        "titleFormatted": {
+          "en": "Set HDMI output to [[output]]"
+        },
+        "hint": {
+          "en": "Select which HDMI output(s) to use"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "output",
+            "type": "dropdown",
+            "title": {
+              "en": "Output"
+            },
+            "values": [
+              {
+                "id": "out1",
+                "label": {
+                  "en": "HDMI 1"
+                }
+              },
+              {
+                "id": "out2",
+                "label": {
+                  "en": "HDMI 2"
+                }
+              },
+              {
+                "id": "both",
+                "label": {
+                  "en": "Both"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_imax_enhanced",
+        "title": {
+          "en": "Set IMAX Enhanced to [[mode]]"
+        },
+        "titleFormatted": {
+          "en": "Set IMAX Enhanced to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the IMAX Enhanced mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "On"
+                }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_input_source",
+        "title": {
+          "en": "Set input to [[source]]"
+        },
+        "titleFormatted": {
+          "en": "Set input to [[source]]"
+        },
+        "hint": {
+          "en": "Select an input source on the receiver"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "source",
+            "type": "dropdown",
+            "title": {
+              "en": "Source"
+            },
+            "values": [
+              {
+                "id": "cd",
+                "label": {
+                  "en": "CD"
+                }
+              },
+              {
+                "id": "bd",
+                "label": {
+                  "en": "Blu-ray"
+                }
+              },
+              {
+                "id": "av",
+                "label": {
+                  "en": "AV"
+                }
+              },
+              {
+                "id": "sat",
+                "label": {
+                  "en": "SAT"
+                }
+              },
+              {
+                "id": "pvr",
+                "label": {
+                  "en": "PVR"
+                }
+              },
+              {
+                "id": "uhd",
+                "label": {
+                  "en": "UHD"
+                }
+              },
+              {
+                "id": "aux",
+                "label": {
+                  "en": "AUX"
+                }
+              },
+              {
+                "id": "display",
+                "label": {
+                  "en": "Display"
+                }
+              },
+              {
+                "id": "fm",
+                "label": {
+                  "en": "FM Tuner"
+                }
+              },
+              {
+                "id": "dab",
+                "label": {
+                  "en": "DAB Tuner"
+                }
+              },
+              {
+                "id": "net",
+                "label": {
+                  "en": "Network"
+                }
+              },
+              {
+                "id": "stb",
+                "label": {
+                  "en": "STB"
+                }
+              },
+              {
+                "id": "game",
+                "label": {
+                  "en": "Game"
+                }
+              },
+              {
+                "id": "bt",
+                "label": {
+                  "en": "Bluetooth"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_lipsync_delay",
+        "title": {
+          "en": "Set lip sync to [[value]] ms"
+        },
+        "titleFormatted": {
+          "en": "Set lip sync to [[value]] ms"
+        },
+        "hint": {
+          "en": "Adjust the lip sync delay (0-250 ms)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "value",
+            "type": "range",
+            "title": {
+              "en": "Delay (ms)"
+            },
+            "min": 0,
+            "max": 250,
+            "step": 5
+          }
+        ]
+      },
+      {
+        "id": "set_room_eq",
+        "title": {
+          "en": "Set Room EQ to [[preset]]"
+        },
+        "titleFormatted": {
+          "en": "Set Room EQ to [[preset]]"
+        },
+        "hint": {
+          "en": "Set the room equalization preset"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "preset",
+            "type": "dropdown",
+            "title": {
+              "en": "Preset"
+            },
+            "values": [
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off"
+                }
+              },
+              {
+                "id": "eq1",
+                "label": {
+                  "en": "EQ 1"
+                }
+              },
+              {
+                "id": "eq2",
+                "label": {
+                  "en": "EQ 2"
+                }
+              },
+              {
+                "id": "eq3",
+                "label": {
+                  "en": "EQ 3"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_subwoofer_trim",
+        "title": {
+          "en": "Set sub trim to [[value]] dB"
+        },
+        "titleFormatted": {
+          "en": "Set sub trim to [[value]] dB"
+        },
+        "hint": {
+          "en": "Adjust the subwoofer trim level (-10 to +10 dB)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "value",
+            "type": "range",
+            "title": {
+              "en": "Sub Trim (dB)"
+            },
+            "min": -10,
+            "max": 10,
+            "step": 0.5
+          }
+        ]
+      },
+      {
+        "id": "set_treble",
+        "title": {
+          "en": "Set treble to [[value]] dB"
+        },
+        "titleFormatted": {
+          "en": "Set treble to [[value]] dB"
+        },
+        "hint": {
+          "en": "Adjust the treble level (-12 to +12 dB)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "value",
+            "type": "range",
+            "title": {
+              "en": "Treble (dB)"
+            },
+            "min": -12,
+            "max": 12,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "zone2_set_source",
+        "title": {
+          "en": "Zone 2: Set source to [[source]]"
+        },
+        "titleFormatted": {
+          "en": "Zone 2: Set source to [[source]]"
+        },
+        "hint": {
+          "en": "Set Zone 2 input source"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "source",
+            "type": "dropdown",
+            "title": {
+              "en": "Source"
+            },
+            "values": [
+              {
+                "id": "cd",
+                "label": {
+                  "en": "CD"
+                }
+              },
+              {
+                "id": "bd",
+                "label": {
+                  "en": "Blu-ray"
+                }
+              },
+              {
+                "id": "av",
+                "label": {
+                  "en": "AV"
+                }
+              },
+              {
+                "id": "sat",
+                "label": {
+                  "en": "SAT"
+                }
+              },
+              {
+                "id": "fm",
+                "label": {
+                  "en": "FM Tuner"
+                }
+              },
+              {
+                "id": "dab",
+                "label": {
+                  "en": "DAB Tuner"
+                }
+              },
+              {
+                "id": "net",
+                "label": {
+                  "en": "Network"
+                }
+              },
+              {
+                "id": "bt",
+                "label": {
+                  "en": "Bluetooth"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "zone2_set_volume",
+        "title": {
+          "en": "Zone 2: Set volume to [[volume]]"
+        },
+        "titleFormatted": {
+          "en": "Zone 2: Set volume to [[volume]]"
+        },
+        "hint": {
+          "en": "Set Zone 2 volume level"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=receiver"
+          },
+          {
+            "name": "volume",
+            "type": "range",
+            "title": {
+              "en": "Volume"
+            },
+            "min": 0,
+            "max": 1,
+            "step": 0.01
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "JBL Synthesis Receiver"
+      },
+      "class": "speaker",
+      "capabilities": [
+        "onoff",
+        "volume_set",
+        "volume_mute",
+        "input_source",
+        "decode_mode",
+        "direct_mode",
+        "bass",
+        "treble",
+        "balance",
+        "room_eq",
+        "dolby_audio",
+        "subwoofer_trim",
+        "sub_stereo_trim",
+        "lipsync_delay",
+        "compression",
+        "display_brightness",
+        "hdmi_output",
+        "imax_enhanced",
+        "audio_format",
+        "video_resolution",
+        "hdr_format",
+        "sample_rate",
+        "now_playing_title",
+        "now_playing_artist",
+        "now_playing_album",
+        "zone2_power",
+        "zone2_source",
+        "zone2_volume",
+        "zone2_mute"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "title": {
+            "en": "Power"
+          }
+        },
+        "volume_set": {
+          "title": {
+            "en": "Volume"
+          },
+          "min": 0,
+          "max": 1,
+          "step": 0.01
+        },
+        "volume_mute": {
+          "title": {
+            "en": "Mute"
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "configure",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "configure"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Connection"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP Address"
+              },
+              "hint": {
+                "en": "IP address of the receiver or serial bridge"
+              },
+              "value": ""
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "label": {
+                "en": "TCP Port"
+              },
+              "hint": {
+                "en": "TCP port (default 50000)"
+              },
+              "value": 50000
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Device"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "dropdown",
+              "label": {
+                "en": "Model"
+              },
+              "hint": {
+                "en": "JBL Synthesis model"
+              },
+              "value": "SDR-38",
+              "values": [
+                {
+                  "id": "SDR-35",
+                  "label": {
+                    "en": "SDR-35"
+                  }
+                },
+                {
+                  "id": "SDR-38",
+                  "label": {
+                    "en": "SDR-38"
+                  }
+                },
+                {
+                  "id": "SDP-55",
+                  "label": {
+                    "en": "SDP-55"
+                  }
+                },
+                {
+                  "id": "SDP-58",
+                  "label": {
+                    "en": "SDP-58"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "images": {
+        "small": "/drivers/receiver/assets/images/small.png",
+        "large": "/drivers/receiver/assets/images/large.png"
+      },
+      "id": "receiver"
+    }
+  ],
+  "capabilities": {
+    "audio_format": {
+      "type": "string",
+      "title": {
+        "en": "Audio Format"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true
+    },
+    "balance": {
+      "type": "number",
+      "title": {
+        "en": "Balance"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": -6,
+      "max": 6,
+      "step": 1,
+      "units": {
+        "en": ""
+      }
+    },
+    "bass": {
+      "type": "number",
+      "title": {
+        "en": "Bass"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": -12,
+      "max": 12,
+      "step": 1,
+      "units": {
+        "en": "dB"
+      }
+    },
+    "compression": {
+      "type": "enum",
+      "title": {
+        "en": "DRC"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "medium",
+          "title": {
+            "en": "Medium"
+          }
+        },
+        {
+          "id": "high",
+          "title": {
+            "en": "High"
+          }
+        }
+      ]
+    },
+    "decode_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Surround Mode"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "stereo",
+          "title": {
+            "en": "Stereo"
+          }
+        },
+        {
+          "id": "dolby_surround",
+          "title": {
+            "en": "Dolby Surround"
+          }
+        },
+        {
+          "id": "neo6_cinema",
+          "title": {
+            "en": "Neo:6 Cinema"
+          }
+        },
+        {
+          "id": "neo6_music",
+          "title": {
+            "en": "Neo:6 Music"
+          }
+        },
+        {
+          "id": "multi_stereo",
+          "title": {
+            "en": "5/7ch Stereo"
+          }
+        },
+        {
+          "id": "neural_x",
+          "title": {
+            "en": "DTS Neural:X"
+          }
+        },
+        {
+          "id": "virtual_x",
+          "title": {
+            "en": "DTS Virtual:X"
+          }
+        },
+        {
+          "id": "dolby_virtual_height",
+          "title": {
+            "en": "Dolby Virtual Height"
+          }
+        },
+        {
+          "id": "auro_native",
+          "title": {
+            "en": "Auro Native"
+          }
+        },
+        {
+          "id": "auro_matic",
+          "title": {
+            "en": "Auro-Matic 3D"
+          }
+        },
+        {
+          "id": "auro_2d",
+          "title": {
+            "en": "Auro-2D"
+          }
+        },
+        {
+          "id": "stereo_downmix",
+          "title": {
+            "en": "Stereo Downmix"
+          }
+        },
+        {
+          "id": "multi_channel",
+          "title": {
+            "en": "Multi-Channel"
+          }
+        },
+        {
+          "id": "mch_neural_x",
+          "title": {
+            "en": "MCH Neural:X"
+          }
+        },
+        {
+          "id": "mch_dolby_surround",
+          "title": {
+            "en": "MCH Dolby Surround"
+          }
+        },
+        {
+          "id": "mch_virtual_x",
+          "title": {
+            "en": "MCH Virtual:X"
+          }
+        },
+        {
+          "id": "mch_dolby_virtual_height",
+          "title": {
+            "en": "MCH Dolby VH"
+          }
+        },
+        {
+          "id": "mch_auro_native",
+          "title": {
+            "en": "MCH Auro Native"
+          }
+        },
+        {
+          "id": "mch_auro_matic",
+          "title": {
+            "en": "MCH Auro-Matic"
+          }
+        },
+        {
+          "id": "mch_auro_2d",
+          "title": {
+            "en": "MCH Auro-2D"
+          }
+        }
+      ]
+    },
+    "direct_mode": {
+      "type": "boolean",
+      "title": {
+        "en": "Direct Mode"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle",
+      "insights": true
+    },
+    "display_brightness": {
+      "type": "enum",
+      "title": {
+        "en": "Display"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "dim",
+          "title": {
+            "en": "Dim"
+          }
+        },
+        {
+          "id": "bright",
+          "title": {
+            "en": "Bright"
+          }
+        }
+      ]
+    },
+    "dolby_audio": {
+      "type": "enum",
+      "title": {
+        "en": "Dolby Audio"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "movie",
+          "title": {
+            "en": "Movie"
+          }
+        },
+        {
+          "id": "music",
+          "title": {
+            "en": "Music"
+          }
+        },
+        {
+          "id": "night",
+          "title": {
+            "en": "Night"
+          }
+        }
+      ]
+    },
+    "hdmi_output": {
+      "type": "enum",
+      "title": {
+        "en": "HDMI Output"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "out1",
+          "title": {
+            "en": "HDMI 1"
+          }
+        },
+        {
+          "id": "out2",
+          "title": {
+            "en": "HDMI 2"
+          }
+        },
+        {
+          "id": "both",
+          "title": {
+            "en": "Both"
+          }
+        }
+      ]
+    },
+    "hdr_format": {
+      "type": "string",
+      "title": {
+        "en": "HDR"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "imax_enhanced": {
+      "type": "enum",
+      "title": {
+        "en": "IMAX Enhanced"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "auto",
+          "title": {
+            "en": "Auto"
+          }
+        },
+        {
+          "id": "on",
+          "title": {
+            "en": "On"
+          }
+        },
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        }
+      ]
+    },
+    "input_source": {
+      "type": "enum",
+      "title": {
+        "en": "Input Source"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "insights": true,
+      "values": [
+        {
+          "id": "cd",
+          "title": {
+            "en": "CD"
+          }
+        },
+        {
+          "id": "bd",
+          "title": {
+            "en": "Blu-ray"
+          }
+        },
+        {
+          "id": "av",
+          "title": {
+            "en": "AV"
+          }
+        },
+        {
+          "id": "sat",
+          "title": {
+            "en": "SAT"
+          }
+        },
+        {
+          "id": "pvr",
+          "title": {
+            "en": "PVR"
+          }
+        },
+        {
+          "id": "uhd",
+          "title": {
+            "en": "UHD"
+          }
+        },
+        {
+          "id": "aux",
+          "title": {
+            "en": "AUX"
+          }
+        },
+        {
+          "id": "display",
+          "title": {
+            "en": "Display"
+          }
+        },
+        {
+          "id": "fm",
+          "title": {
+            "en": "FM Tuner"
+          }
+        },
+        {
+          "id": "dab",
+          "title": {
+            "en": "DAB Tuner"
+          }
+        },
+        {
+          "id": "net",
+          "title": {
+            "en": "Network"
+          }
+        },
+        {
+          "id": "stb",
+          "title": {
+            "en": "STB"
+          }
+        },
+        {
+          "id": "game",
+          "title": {
+            "en": "Game"
+          }
+        },
+        {
+          "id": "bt",
+          "title": {
+            "en": "Bluetooth"
+          }
+        }
+      ]
+    },
+    "lipsync_delay": {
+      "type": "number",
+      "title": {
+        "en": "Lip Sync"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": 0,
+      "max": 250,
+      "step": 5,
+      "units": {
+        "en": "ms"
+      }
+    },
+    "now_playing_album": {
+      "type": "string",
+      "title": {
+        "en": "Album"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "now_playing_artist": {
+      "type": "string",
+      "title": {
+        "en": "Artist"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "now_playing_title": {
+      "type": "string",
+      "title": {
+        "en": "Track"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "room_eq": {
+      "type": "enum",
+      "title": {
+        "en": "Room EQ"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "eq1",
+          "title": {
+            "en": "EQ 1"
+          }
+        },
+        {
+          "id": "eq2",
+          "title": {
+            "en": "EQ 2"
+          }
+        },
+        {
+          "id": "eq3",
+          "title": {
+            "en": "EQ 3"
+          }
+        }
+      ]
+    },
+    "sample_rate": {
+      "type": "string",
+      "title": {
+        "en": "Sample Rate"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "sub_stereo_trim": {
+      "type": "number",
+      "title": {
+        "en": "Sub Stereo Trim"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": -10,
+      "max": 0,
+      "step": 0.5,
+      "units": {
+        "en": "dB"
+      }
+    },
+    "subwoofer_trim": {
+      "type": "number",
+      "title": {
+        "en": "Sub Trim"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": -10,
+      "max": 10,
+      "step": 0.5,
+      "units": {
+        "en": "dB"
+      }
+    },
+    "treble": {
+      "type": "number",
+      "title": {
+        "en": "Treble"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": -12,
+      "max": 12,
+      "step": 1,
+      "units": {
+        "en": "dB"
+      }
+    },
+    "video_resolution": {
+      "type": "string",
+      "title": {
+        "en": "Video"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true
+    },
+    "zone2_mute": {
+      "type": "boolean",
+      "title": {
+        "en": "Zone 2 Mute"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle"
+    },
+    "zone2_power": {
+      "type": "boolean",
+      "title": {
+        "en": "Zone 2 Power"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle"
+    },
+    "zone2_source": {
+      "type": "enum",
+      "title": {
+        "en": "Zone 2 Source"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "cd",
+          "title": {
+            "en": "CD"
+          }
+        },
+        {
+          "id": "bd",
+          "title": {
+            "en": "Blu-ray"
+          }
+        },
+        {
+          "id": "av",
+          "title": {
+            "en": "AV"
+          }
+        },
+        {
+          "id": "sat",
+          "title": {
+            "en": "SAT"
+          }
+        },
+        {
+          "id": "pvr",
+          "title": {
+            "en": "PVR"
+          }
+        },
+        {
+          "id": "uhd",
+          "title": {
+            "en": "UHD"
+          }
+        },
+        {
+          "id": "aux",
+          "title": {
+            "en": "AUX"
+          }
+        },
+        {
+          "id": "fm",
+          "title": {
+            "en": "FM Tuner"
+          }
+        },
+        {
+          "id": "dab",
+          "title": {
+            "en": "DAB Tuner"
+          }
+        },
+        {
+          "id": "net",
+          "title": {
+            "en": "Network"
+          }
+        },
+        {
+          "id": "stb",
+          "title": {
+            "en": "STB"
+          }
+        },
+        {
+          "id": "game",
+          "title": {
+            "en": "Game"
+          }
+        },
+        {
+          "id": "bt",
+          "title": {
+            "en": "Bluetooth"
+          }
+        }
+      ]
+    },
+    "zone2_volume": {
+      "type": "number",
+      "title": {
+        "en": "Zone 2 Volume"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "decimals": 2
+    }
+  }
 }
