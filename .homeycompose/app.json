@@ -1,6 +1,6 @@
 {
   "id": "com.jbl.synthesis",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -10,7 +10,7 @@
     "en": "JBL Synthesis"
   },
   "description": {
-    "en": "JBL Synthesis brings award-winning sound to your home."
+    "en": "Award-winning home theater sound at your fingertips."
   },
   "brandColor": "#000000",
   "category": [

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .r { fill: #030000; stroke-width: 0px; }
+    </style>
+  </defs>
+  <!-- Receiver body -->
+  <rect class="r" x="60" y="300" width="880" height="400" rx="24"/>
+  <!-- Display cutout -->
+  <rect x="140" y="380" width="320" height="180" rx="12" fill="#fff"/>
+  <!-- Button grid -->
+  <circle cx="540" cy="430" r="16" fill="#fff"/>
+  <circle cx="590" cy="430" r="16" fill="#fff"/>
+  <circle cx="640" cy="430" r="16" fill="#fff"/>
+  <circle cx="540" cy="480" r="16" fill="#fff"/>
+  <circle cx="590" cy="480" r="16" fill="#fff"/>
+  <circle cx="640" cy="480" r="16" fill="#fff"/>
+  <circle cx="540" cy="530" r="16" fill="#fff"/>
+  <circle cx="590" cy="530" r="16" fill="#fff"/>
+  <circle cx="640" cy="530" r="16" fill="#fff"/>
+  <!-- Volume knob -->
+  <circle cx="800" cy="500" r="120" fill="#fff"/>
+  <circle class="r" cx="800" cy="500" r="95"/>
+  <circle cx="800" cy="500" r="8" fill="#fff"/>
+  <!-- Knob indicator line -->
+  <rect x="796" y="410" width="8" height="40" rx="4" fill="#fff"/>
+  <!-- Feet -->
+  <rect class="r" x="120" y="700" width="60" height="20" rx="10"/>
+  <rect class="r" x="820" y="700" width="60" height="20" rx="10"/>
+</svg>
